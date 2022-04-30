@@ -71,14 +71,15 @@ module  transaction_counter
 );
 
 logic[31:0] count;
-
+//sequential -> non-blocking assignment
+//combinational -> blocking assignment
 always_ff@(posedge clk) begin
     if (! resetn) //reset is active in low signal
         count <= 0; //set transactions to 0 for initial
     else begin
         if (count == sampling_rate) begin
-            count = 0;
-            count_flag = 1;
+            count <= 0;
+            count_flag <= 1;
         end
         else
             count <= (valid == 1 & ready == 1) ? count + 1: count;
