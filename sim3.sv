@@ -4,7 +4,7 @@
 //`include "width_defs.vh"
 
 //AXI-Stream interface definition
-module sim3 #(parameter STREAM_WIDTH = 32)(input clk);
+module sim3 #(parameter STREAM_WIDTH = 32);
     logic[STREAM_WIDTH-1:0]  TDATA;
     logic                    TVALID;
     logic                    TLAST;
