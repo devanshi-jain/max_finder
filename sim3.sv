@@ -22,7 +22,7 @@ module sim3 #(parameter STREAM_WIDTH = 32);
         TVALID
         ); 
     
-    always@(clock) 
+    always@(ACLK) 
         #10ns ACLK <= !ACLK;
 
     initial begin
@@ -30,7 +30,7 @@ module sim3 #(parameter STREAM_WIDTH = 32);
     TVALID = 1;
     end
     
-    always@(posedge clock)
+    always@(posedge ACLK)
         if(TVALID & TDATA) begin 
             if(TLAST) begin
                 TDATA = $urandom_range(0,65000);
