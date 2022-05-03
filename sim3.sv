@@ -14,14 +14,13 @@ module sim3 #(parameter STREAM_WIDTH = 32);
     logic                    ARESET_n;
 
     maxtest3 design_inst(
-        ACLK,
-        ARESET_n,
-        TREADY,
-        TDATA,
-        TLAST,
-        TVALID
+        .s_axis_aclk(ACLK),
+        .s_axis_aresetn(ARESET_n),
+        .s_axis_tready(TREADY),
+        .s_axis_tdata(TDATA),
+        .s_axis_tlast(TLAST),
+        .s_axis_tvalid(TVALID)
         ); 
-    
 
     initial begin
         ACLK = 0;
