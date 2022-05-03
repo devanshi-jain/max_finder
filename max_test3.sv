@@ -88,7 +88,7 @@ module max_finder
     input logic [31:0] data,
     input logic tlast,
     input logic resetn,
-    output logic maxm,
+    output logic maxm//,
     //output logic valid
 );
 
