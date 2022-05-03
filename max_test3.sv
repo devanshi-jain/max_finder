@@ -41,7 +41,7 @@ module maxtest3 #(
     transaction_counter inst_transaction_counter(s_axis_tvalid, s_axis_tready, s_axis_aclk, s_axis_aresetn, c2);
 
     // Instantiation of max
-    max_finder inst_max_finder(/*c1, */c2, s_axis_aclk, s_axis_tdata, s_axis_tlast, s_axis_aresetn/*, MAX*/, s_axis_tvalid);
+    max_finder inst_max_finder(/*c1, */c2, s_axis_aclk, s_axis_tdata, s_axis_tlast, s_axis_aresetn/*, MAX, s_axis_tvalid*/);
 
 endmodule
 
@@ -89,7 +89,7 @@ module max_finder
     input logic tlast,
     input logic resetn,
     output logic maxm,
-    output logic valid
+    //output logic valid
 );
 
 logic [15:0] data1;
