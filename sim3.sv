@@ -22,14 +22,20 @@ module sim3 #(parameter STREAM_WIDTH = 32);
         TVALID
         ); 
     
-    always@(ACLK) 
-        #10ns ACLK <= !ACLK;
 
     initial begin
+        ACLK = 0;
+        ARESET_n = 0; //resets everything (global) (active mode)
+         #20ns ARESET_n = 1; //after two clock cycles set it to 1
+        //default timescale is a nanosecond
     #10;
     TVALID = 1;
     end
-    
+
+    always@(ACLK)
+            #10ns ACLK <= !ACLK;
+
+
     always@(posedge ACLK)
         if(TVALID & TDATA) begin 
             if(TLAST) begin
