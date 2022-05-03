@@ -5,7 +5,7 @@
 // 
 // Create Date: 04/24/2022 05:32:30 PM
 // Design Name: 
-// Module Name: maxtest3
+// Module Name: max_test3
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -32,21 +32,6 @@ module maxtest3 #(
     input logic s_axis_tlast,
     input logic s_axis_tvalid
     );
-    
-    //Instantiation of Axi Bus Interface S_AXIS,
-//    sample_generator_v1_0_S_AXIS #(
-//        .C_S_AXIS_TDATA_WIDTH( C_S_AXIS_TDATA_WIDTH)
-////    ) 
-////    sample_generator_v1_0_S_AXIS_inst 
-////    (
-//        .En(En),
-//        .S_AXIS_ACLK(s_axis_aclk),
-//        .S_AXIS_ARESETN(s_axis_aresetn),
-//        .S_AXIS_TREADY(s_axis_tready),
-//        .S_AXIS_TDATA(s_axis_data),
-//        .S_AXIS_TLAST(s_axis_tlast),
-//        .S_AXIS_TVALID(s_axis_tvalid)
-//    );
 
     logic c1, c2;
     // Instantiation of transaction_counter
