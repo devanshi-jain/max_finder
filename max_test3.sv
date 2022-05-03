@@ -34,6 +34,9 @@ module maxtest3 #(
     );
 
     logic c1, c2;
+
+    always_comb
+        s_axis_tready = s_axis_aresetn;
     // Instantiation of transaction_counter
     transaction_counter inst_transaction_counter(s_axis_tvalid, s_axis_tready, s_axis_aclk, s_axis_aresetn, c2);
 
@@ -42,10 +45,12 @@ module maxtest3 #(
 
 endmodule
 
+
+
 // SETTING UP COUNTER
 module  transaction_counter
 // transaction_counter inst_transaction(s_axis_tvalid, s_axis_tready, s_axis_aclk, s_axis_aresetn, c1, c2);
-#(parameter int sampling_rate = 500000)
+#(parameter int sampling_rate = 500)//checking for 500
 (
     input logic valid,
     input logic ready,
@@ -67,7 +72,7 @@ always_ff@(posedge clk) begin
             count_flag <= 1;
         end
         else
-            count <= (valid == 1 & ready == 1) ? count + 1: count;
+        count <= (valid  && ready); //? count + 1: count;
     end
 end
 
