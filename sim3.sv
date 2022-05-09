@@ -1,5 +1,3 @@
-//@author : Ravi Johnson
-
 `timescale 1ns / 1ps
 //`include "width_defs.vh"
 

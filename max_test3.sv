@@ -96,8 +96,9 @@ logic [15:0] data1;
 logic [15:0] data2;
 logic [15:0] data3;
 logic [15:0] data4;
-always_ff@(posedge clk) begin /*use of negedge reset??*/
-    // using tlast to find respective channel numbers 
+
+always_ff@(posedge clk) begin
+
     if (!tlast) begin
         data1[15:0] <= data[15:0];
         data2[15:0] <= data[31:16];
@@ -106,8 +107,114 @@ always_ff@(posedge clk) begin /*use of negedge reset??*/
         data3[15:0] <= data[15:0];
         data4[15:0] <= data[31:16];
     end
-    //accumulate maximum??
+end
+
+//Second register for 1st hydrophone
+logic [15:0] data1_max;
+
+always_ff@(posedge clk) begin 
+    data1_max[0] = data1[0];
+    for(int i=1; i<15;i++)
+        if (data1_max[i-1]>data1[i]) begin
+            data1_max[i] = data1_max[i-1];
+        end
+        else begin
+            data1_max[i] = data1[i];
+        end
     end
 
+//Third register for 1st hydrophone
+logic data1_final;
 
+int max1 = 0;
+for(int i=0; i<15;i++)
+    if (max1 < data1_max[i]) begin
+        max1 = data1_max[i];
+    end
+end
+data1_final = max1;
+
+//Second register for 2nd hydrophone
+logic [15:0] data2_max;
+
+always_ff@(posedge clk) begin 
+    data2_max[0] = data2[0];
+    for(int i=1; i<15;i++)
+        if (data2_max[i-1]>data2[i]) begin
+            data2_max[i] = data2_max[i-1];
+        end
+        else begin
+            data2_max[i] = data2[i];
+        end
+    end
+
+//Third register for 2nd hydrophone
+logic data2_final;
+
+int max2 = 0;
+for(int i=0; i<15;i++)
+    if (max2 < data2_max[i]) begin
+        max2 = data2_max[i];
+    end
+end
+data2_final = max2;
+
+//Second register for 3rd hydrophone
+logic [15:0] data3_max;
+
+always_ff@(posedge clk) begin 
+    data3_max[0] = data3[0];
+    for(int i=1; i<15;i++)
+        if (data3_max[i-1]>data3[i]) begin
+            data3_max[i] = data3_max[i-1];
+        end
+        else begin
+            data3_max[i] = data3[i];
+        end
+    end
+
+//Third register for 3rd hydrophone
+logic data3_final;
+
+int max3 = 0;
+for(int i=0; i<15;i++)
+    if (max3 < data3_max[i]) begin
+        max3 = data3_max[i];
+    end
+end
+data3_final = max3;
+
+//Second register for 4th hydrophone
+logic [15:0] data4_max;
+
+always_ff@(posedge clk) begin 
+    data4_max[0] = data4[0];
+    for(int i=1; i<15;i++)
+        if (data4_max[i-1]>data4[i]) begin
+            data4_max[i] = data4_max[i-1];
+        end
+        else begin
+            data4_max[i] = data4[i];
+        end
+    end
+
+//Third register for 4th hydrophone
+logic data4_final;
+
+int max4 = 0;
+for(int i=0; i<15;i++)
+    if (max4 < data4_max[i]) begin
+        max4 = data4_max[i];
+    end
+end
+data4_final = max4;
+
+
+//at reset move maximum into output and reset internal max.
+
+
+
+
+
+     
 endmodule
